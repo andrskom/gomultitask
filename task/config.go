@@ -1,24 +1,21 @@
 package task
 
+//Config for task
 type Config struct {
 	// <  0 - unlimited(always restart)
 	// == 0 - stop all after first err
 	// >  0 - stop after fail number > FallNumber
-	// default 0
-	FallNumber *int
+	FallNumber int
 }
 
-func (tc *Config) GetFallNumber() int {
-	if tc.FallNumber == nil {
-		return 0
+//GetDefaultConfig return default set config
+func GetDefaultConfig() Config {
+	return Config{
+		FallNumber: 0,
 	}
-	return *tc.FallNumber
 }
 
+//FallNumberIsUnlimited return true for not limited fall for task
 func (tc *Config) FallNumberIsUnlimited() bool {
-	if tc.FallNumber == nil {
-		return false
-	}
-	return *tc.FallNumber < 0
+	return tc.FallNumber < 0
 }
-
