@@ -41,7 +41,6 @@ func (t *TestingTask) Run(context.Context) error {
 			panic(msg)
 		}
 	}
-	return nil
 }
 
 func (t *TestingTask) Shutdown(context.Context) error {
