@@ -5,13 +5,13 @@ type Logger interface {
 	Errorf(string, ...interface{})
 }
 
-func (o *Operator) LogInfof(msg string, args ...interface{}) {
+func (o *Operator) logInfof(msg string, args ...interface{}) {
 	if o.log != nil {
 		o.log.Infof(msg, args...)
 	}
 }
 
-func (o *Operator) LogErrorf(msg string, args ...interface{}) {
+func (o *Operator) logErrorf(msg string, args ...interface{}) {
 	if o.log != nil {
 		o.log.Errorf(msg, args...)
 	}

@@ -9,7 +9,7 @@ vendor:
 
 test:
 	@echo "+ $@"
-	@go test -cover ./...
+	@go test -count=5 -cover ./...
 .PHONY: test
 
 lint:
