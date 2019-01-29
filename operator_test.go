@@ -4,13 +4,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/andrskom/gomultitask/task"
-	"github.com/stretchr/testify/require"
 	"os"
 	"strconv"
 	"syscall"
 	"testing"
 	"time"
+
+	"github.com/andrskom/gomultitask/task"
+	"github.com/stretchr/testify/require"
 )
 
 type TestingTask struct {
@@ -254,7 +255,7 @@ TestWaiter:
 		case msg := <-tLogger.errChan:
 			if msg == "Have got 1 errors while shutdown tasks" {
 				foundShutdownErr = true
-				 break TestWaiter
+				break TestWaiter
 			}
 		case <-time.After(time.Second):
 			r.Fail("have not err int time")

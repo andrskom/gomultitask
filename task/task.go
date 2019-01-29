@@ -5,7 +5,6 @@ import (
 	"fmt"
 )
 
-
 //Task is system wrapper for task
 type Task struct {
 	id            string
