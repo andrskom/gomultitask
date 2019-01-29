@@ -1,6 +1,8 @@
 SRV = $(notdir $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST))))))
 PROJECT = github.com/andrskom/${SRV}
 
+all: vendor lint test
+.PHONY: all
 
 vendor:
 	@echo "+ $@"
