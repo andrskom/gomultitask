@@ -3,6 +3,7 @@ package task
 import (
 	"context"
 	"fmt"
+	"time"
 )
 
 //Task is system wrapper for task
@@ -56,6 +57,9 @@ func (t *Task) Run(ctx context.Context) (err error) {
 			t.state.FallNumberInc()
 			if t.cfg.FallNumberIsUnlimited() || t.state.GetFallNumber() <= t.cfg.FallNumber {
 				t.sendNotHandledErr(err)
+				if t.cfg.HasRestartTimeout() {
+					time.Sleep(t.cfg.RestartTimeout)
+				}
 				continue
 			}
 			t.state.SetFailed()
