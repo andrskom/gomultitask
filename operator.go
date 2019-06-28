@@ -14,7 +14,7 @@ import (
 
 const defaultShutdownDeadline = 30 * time.Second
 
-//Operator is main struct for managing tasks
+// Operator is main struct for managing tasks
 type Operator struct {
 	log              Logger
 	tasks            []*task.Task
@@ -26,7 +26,7 @@ type Operator struct {
 	shutdownDeadline time.Duration
 }
 
-//NewOperator init default operator for tasks
+// NewOperator init default operator for tasks
 func NewOperator(list ...task.Interface) *Operator {
 	taskList := make([]*task.Task, 0)
 	notHandledErr := make(chan task.Err, 5)
@@ -45,27 +45,27 @@ func NewOperator(list ...task.Interface) *Operator {
 	}
 }
 
-//WithLogger add logger
+// WithLogger add logger
 func (o *Operator) WithLogger(log Logger) *Operator {
 	o.log = log
 	return o
 }
 
-//WithShutdownDeadline add shutdown deadline, default is 30s
+// WithShutdownDeadline add shutdown deadline, default is 30s
 func (o *Operator) WithShutdownDeadline(duration time.Duration) *Operator {
 	o.shutdownDeadline = duration
 	return o
 }
 
-//WithShutdownSignals set custom shutdown signals
+// WithShutdownSignals set custom shutdown signals
 func (o *Operator) WithShutdownSignals(signals []os.Signal) *Operator {
 	o.shutdownSignals = signals
 	return o
 }
 
-//Run tasks and wait while stop
+// Run tasks and wait while stop
 func (o *Operator) Run(ctx context.Context) error {
-	//signals catcher
+	// signals catcher
 	signal.Notify(o.sigCh, o.shutdownSignals...)
 
 	// internal context for supply routines
@@ -74,7 +74,7 @@ func (o *Operator) Run(ctx context.Context) error {
 	// init background notHandledErr logger
 	go o.logNotHandledErr(internalCtx)
 
-	//run all tasks
+	// run all tasks
 	for _, t := range o.tasks {
 		go func(t *task.Task) {
 			if err := t.Run(ctx); err != nil {

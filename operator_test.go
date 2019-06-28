@@ -10,8 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/andrskom/gomultitask/task"
 	"github.com/stretchr/testify/require"
+
+	"github.com/andrskom/gomultitask/task"
 )
 
 type TestingTask struct {

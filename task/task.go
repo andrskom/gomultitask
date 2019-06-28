@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-//Task is system wrapper for task
+// Task is system wrapper for task
 type Task struct {
 	id            string
 	cfg           Config
@@ -16,14 +16,14 @@ type Task struct {
 	notHandledErr chan<- Err
 }
 
-//Err is internal task error
+// Err is internal task error
 type Err struct {
 	Err        error
 	ID         string
 	FallNumber int
 }
 
-//NewFromInterface build task wrapper from user's task
+// NewFromInterface build task wrapper from user's task
 //  notHandledErr - is channel for send custom err while we can restart application
 //  i - user's task
 func NewFromInterface(notHandledErr chan<- Err, i Interface) *Task {
@@ -45,7 +45,7 @@ func (t *Task) sendNotHandledErr(err error) {
 	}
 }
 
-//Run task with restart while not reached fall limit or exit
+// Run task with restart while not reached fall limit or exit
 func (t *Task) Run(ctx context.Context) (err error) {
 	defer func() {
 		if rec := recover(); rec != nil {
@@ -70,7 +70,7 @@ func (t *Task) Run(ctx context.Context) (err error) {
 	return nil
 }
 
-//Shutdown task, is failed, don't need to stop it
+// Shutdown task, is failed, don't need to stop it
 func (t *Task) Shutdown(ctx context.Context) error {
 	if t.state.IsFailed() {
 		return nil
@@ -78,7 +78,7 @@ func (t *Task) Shutdown(ctx context.Context) error {
 	return t.shutDownF(ctx)
 }
 
-//GetID return id of task
+// GetID return id of task
 func (t *Task) GetID() string {
 	return t.id
 }
