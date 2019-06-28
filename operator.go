@@ -140,7 +140,7 @@ func (o *Operator) logNotHandledErr(ctx context.Context) {
 		case <-ctx.Done():
 			return
 		case err := <-o.notHandledErr:
-			o.logErrorf("ID: %s, FallNumber: %d, Err: %s", err.ID, err.FallNumber, err.Err.Error())
+			o.logErrorf("ID: %s, FallNumber: %d, Err: %#v", err.ID, err.FallNumber, err.Err)
 		}
 	}
 }
