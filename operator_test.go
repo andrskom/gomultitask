@@ -126,7 +126,7 @@ func TestErrLogging(t *testing.T) {
 	for i := 1; i <= 3; i++ {
 		errMsgList = append(
 			errMsgList,
-			fmt.Sprintf("ID: testingTask%d, FallNumber: 1, Err: expected err %d", i, i),
+			fmt.Sprintf("ID: testingTask%d, FallNumber: 1, Err: &errors.errorString{s:\"expected err %d\"}", i, i),
 		)
 		tasks[i].finishTaskCh <- fmt.Errorf("expected err %d", i)
 	}

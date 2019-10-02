@@ -18,5 +18,5 @@ lint:
 	@echo "+ $@"
 	@docker run --rm -i  \
 		-v ${PWD}:/go/src/${PROJECT} \
-		-w /go/src/${PROJECT} golangci/golangci-lint:v1.12 golangci-lint run --enable-all --skip-dirs vendor,version,pkg/gen ./...
+		-w /go/src/${PROJECT} golangci/golangci-lint:v1.18 golangci-lint run --enable-all --skip-dirs vendor,version,pkg/gen ./...
 .PHONY: lint

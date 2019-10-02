@@ -2,8 +2,9 @@ package task
 
 // State of task
 type State struct {
-	fallNumber int
-	failed     bool
+	fallNumber        int
+	failed            bool
+	shutdownRequested bool
 }
 
 // GetDefaultState build default state
@@ -32,4 +33,14 @@ func (s *State) SetFailed() {
 // IsFailed return failed status
 func (s *State) IsFailed() bool {
 	return s.failed
+}
+
+// SetShutdownRequested register request of shutdown.
+func (s *State) SetShutdownRequested() {
+	s.shutdownRequested = true
+}
+
+// IsShutdownRequested return state of shutdown.
+func (s *State) IsShutdownRequested() bool {
+	return s.shutdownRequested
 }
