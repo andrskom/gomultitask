@@ -2,6 +2,7 @@ package task
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 )
@@ -53,6 +54,9 @@ func (t *Task) Run(ctx context.Context) (err error) {
 		}
 	}()
 	for {
+		if t.state.IsShutdownRequested() {
+			return errors.New("try to rerun when shutdown requested")
+		}
 		if err := t.runF(ctx); err != nil {
 			t.state.FallNumberInc()
 			if t.cfg.FallNumberIsUnlimited() || t.state.GetFallNumber() <= t.cfg.FallNumber {
@@ -75,6 +79,7 @@ func (t *Task) Shutdown(ctx context.Context) error {
 	if t.state.IsFailed() {
 		return nil
 	}
+	t.state.SetShutdownRequested()
 	return t.shutDownF(ctx)
 }
 
